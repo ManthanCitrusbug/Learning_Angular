@@ -1,0 +1,8 @@
+<h4>Books List</h4>
+<ul>
+    <ng-container *ngFor="let book of books">
+        <app-single-book [book]="book"></app-single-book>
+        <br>
+        <br>
+    </ng-container>
+</ul>
