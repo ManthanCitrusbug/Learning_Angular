@@ -5,3 +5,7 @@ h4 {
 img {
     width: 100px;
 }
+
+li {
+    list-style-type: upper-roman;
+}

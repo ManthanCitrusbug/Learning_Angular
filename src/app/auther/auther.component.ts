@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-auther',
@@ -7,9 +8,37 @@ import { Component } from '@angular/core';
 })
 export class AutherComponent {
 
-  name:string = ""
+  dataname:string = ""
+  basicFormData:any={}
 
-  getValue(event:any){
-    this.name = event.target.value
+  reactiveForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(5)])
+  })
+
+  get name(){
+    return this.reactiveForm.get('name')
   }
+
+  get email(){
+    return this.reactiveForm.get('email')
+  }
+
+  get password(){
+    return this.reactiveForm.get('password')
+  }
+
+  // getValue(value:string){
+  //   this.dataname = value;
+  // }
+
+  getBasicFormValue(data:any){
+    this.basicFormData = data    
+  }
+
+  getReactiveFormData(){
+    this.basicFormData = this.reactiveForm.value
+  }
+
 }

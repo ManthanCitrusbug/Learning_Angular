@@ -7,4 +7,5 @@
     <img [src]="book.image_src" [alt]="book.bookname" [hidden]="book.imageDisplay">
     {{ book.bookname }} wirriten by {{ book.auther }}
     <p>{{ book.price | currency:"INR" }}</p>
+    <button (click)="getBookData.emit(book)">Add to cart</button>
 </li>

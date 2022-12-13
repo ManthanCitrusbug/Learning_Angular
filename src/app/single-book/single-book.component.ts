@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Books } from '../books/books.component';
 
 @Component({
@@ -8,4 +8,5 @@ import { Books } from '../books/books.component';
 })
 export class SingleBookComponent {
 @Input() book: Books = {} as Books;
+@Output() getBookData = new EventEmitter<Books>()
 }

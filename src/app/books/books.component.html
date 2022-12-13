@@ -1,8 +1,11 @@
 <h4>Books List</h4>
 <ul>
     <ng-container *ngFor="let book of books">
-        <app-single-book [book]="book"></app-single-book>
+        <app-single-book (getBookData)="getBook($event)" [book]="book"></app-single-book>
         <br>
-        <br>
+    </ng-container>
+    <h3>Cart</h3>
+    <ng-container *ngFor="let book of cart">
+        <p>{{book.bookname}}</p>
     </ng-container>
 </ul>

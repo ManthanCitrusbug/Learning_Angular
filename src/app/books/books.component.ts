@@ -18,6 +18,8 @@ export interface Books {
 
 export class BooksComponent {
 
+  cart: Books[] = []
+
   books: Books[] = [
     {
       bookname: "Introduction to Algorithms",
@@ -35,6 +37,10 @@ export class BooksComponent {
     }
   ]
 
+  getBook(book:Books){
+    // this.cart = this.cart.filter(book=>book.bookname!=book.bookname)
+    this.cart.push(book)
+  }
   // bookname: string = "Introduction to Algorithms";
   // auther: string = "Thomas H. Cormen"
   // image_src: string = "https://cdn.hackr.io/uploads/posts/attachments/introduction-to-algorithms-eastern-economy-edition.jpg"
