@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './auther.component.html',
   styleUrls: ['./auther.component.css']
 })
-export class AutherComponent {
+export class AutherComponent implements OnInit {
 
   dataname:string = ""
   basicFormData:any={}
@@ -27,6 +27,12 @@ export class AutherComponent {
 
   get password(){
     return this.reactiveForm.get('password')
+  }
+
+  constructor () {}
+
+  ngOnInit(): void {
+      console.warn("asdyasuydfasuyf"); 
   }
 
   // getValue(value:string){
