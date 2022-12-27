@@ -1,0 +1,17 @@
+<button mat-raised-button color="primary" class="mx-2" (click)="logout()">Logout</button>
+<ng-container *ngFor="let user of userData">
+    <div class="container w-75 m-auto mt-5 bg-light p-5">
+        <h2 appHeaderDirective>Name: {{ user.name }}</h2> <hr>
+        <h5>Email: {{ user.email }}</h5> <hr>
+        <h5>Phone Number: {{ user.phoneNumber }}</h5> <hr>
+        <h5>Gender: {{ user.gender }}</h5> <hr>
+        <h5>City: {{ user.city }}</h5> <hr>
+        <h5>Hobby: {{ user.hobby }}</h5> <hr>
+        <h5>Date of Birth: {{ user.dob }}</h5> <hr>
+        <h5>Age: {{ user.age }}</h5> <hr>
+        <h5>Range: {{ user.range | range }}</h5> <hr>
+        <h5>Password: {{ user.password }}</h5> <hr>
+        <h5>Advance Pipe: {{ 20 | advance : 3 }}</h5> <hr>
+        <button mat-raised-button color="warn" (click)="delete(user.id)">Delete</button>
+    </div>
+</ng-container>

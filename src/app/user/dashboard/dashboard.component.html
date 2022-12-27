@@ -1,0 +1,71 @@
+<div class="container text-center my-5 bg-light py-5">
+    <h1>User Details</h1>
+    <form [formGroup]="userDetailForm" (ngSubmit)="userDetailUpdate()">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" name="name" class="form-control w-75 m-auto" placeholder="Enter Name">
+        <span *ngIf="name && name.invalid && (name.touched || name.dirty)" class="text-center text-danger">Name is Required</span> <br> <br>
+    
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" name="email" class="form-control w-75 m-auto" placeholder="Enter Email">
+        <span *ngIf="email && email.errors?.['required'] && (email.touched || email.dirty)" class="text-center text-danger">Email is Required</span>
+        <span *ngIf="email && email.errors?.['email'] && (email.touched || email.dirty)" class="text-center text-danger">Enter valid is Required</span> <br> <br>
+    
+        <label for="phoneNumber">Phone Number</label>
+        <input type="number" formControlName="phoneNumber" name="phoneNumber" class="form-control w-75 m-auto" placeholder="Enter Phone Number">
+        <span *ngIf="phoneNumber && (phoneNumber.touched || phoneNumber.dirty) &&
+        phoneNumber.errors?.['required']" class="text-center text-danger">Phone Number is Required</span> <br>
+        <span *ngIf="phoneNumber && (phoneNumber.errors?.['min'] || phoneNumber.errors?.['max'])" class="text-center text-danger">Phone Number length must be 10</span> <br>
+    
+        <label for="gender">Gender</label> <br>
+        <input type="radio" formControlName="gender" name="gender" value="male" class="m-auto mx-2" placeholder="Enter Name"> Male
+        <input type="radio" formControlName="gender" name="gender" value="female" class="m-auto mx-2" placeholder="Enter Name"> Female
+        <input type="radio" formControlName="gender" name="gender" value="other" class="m-auto mx-2" placeholder="Enter Name"> Other <br>
+        <span *ngIf="gender && gender.errors?.['required']" class="text-center text-danger">This field is required</span> <br> <br>
+    
+        <label for="city">City</label>
+        <select name="city" formControlName="city" class="form-control w-75 m-auto">
+            <ng-container *ngFor="let city of cityList">
+                <option value="{{ city }}">{{ city }}</option>
+            </ng-container>
+        </select>
+        <span *ngIf="city && city.errors?.['required']" class="text-center text-danger">This field is required</span>  <br>
+    
+        <label for="hobby">Hobby</label> <br>
+        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Music" (change)="updateHobby($event)"> Music
+        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Travel" (change)="updateHobby($event)"> Travel
+        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Play" (change)="updateHobby($event)"> Play
+        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Drawing" (change)="updateHobby($event)"> Drawing <br>
+        <span *ngIf="hobbyError" class="text-center text-danger">This field is required</span> <br> <br>
+    
+        <label for="dob">Date of Birth</label>
+        <input type="date" name="dob" formControlName="dob" class="form-control w-75 m-auto" placeholder="Enter Name" (change)="updateAge($event)">
+        <span *ngIf="dob && dob.errors?.['required'] && dob.touched" class="text-center text-danger">Enter Birth Date</span>  <br> <br>
+    
+        <label for="age">Age</label>
+        <input type="number" name="age" formControlName="age" class="form-control w-75 m-auto" placeholder="Age" value="{{ age }}">  <br>
+    
+        <label for="range">Range (Value = {{ rangeVal }})</label> <br>
+        <input type="range" name="range" formControlName="range" class="w-75 m-auto" min="0" max="100" value="{{ rangeVal }}" [(ngModel)]="rangeVal">
+        <span *ngIf="range && range.errors?.['required'] && range.touched" class="text-center text-danger">Enter Birth Date</span>  <br> <br>
+
+        <label for="userType">User Type</label>
+        <select name="userType" formControlName="userType" class="form-control w-75 m-auto">
+            <ng-container *ngFor="let usertype of userTypeList">
+                <option value="{{ usertype }}">{{ usertype }}</option>
+            </ng-container>
+        </select>  <br>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" formControlName="password" class="form-control w-75 m-auto" placeholder="Enter Password">
+        <span *ngIf="password && password.errors?.['required'] && password.touched" class="text-center text-danger">Enter your password</span>  <br> <br>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="text" name="confirmPassword" formControlName="confirmPassword" class="form-control w-75 m-auto" placeholder="Confirm your password">
+        <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br> <br>
+
+        <button mat-raised-button color="accent" [disabled]="userDetailForm.invalid">Update Details</button>
+    </form>
+    <hr>
+    <button mat-raised-button color="primary" class="mx-2" (click)="logout()">Logout</button>
+    <a routerLink="/user/step-form/step-1" mat-raised-button color="warn" class="mx-2">Step-Form</a>
+</div>
