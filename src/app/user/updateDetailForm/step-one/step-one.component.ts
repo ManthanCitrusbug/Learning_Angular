@@ -12,31 +12,49 @@ export class StepOneComponent {
   constructor(private route:Router, private newForm: FormBuilder) {}
 
   stepOneFormData!:any;
+  age!:number;
+  userTypeList:string[] = ["Admin", "User"]
+  cityList:string[] = ["Ahmedabad", "Surat", "Gandhinagar", "Rajkot"]
+  stepOne!:any;
 
   stepForm = this.newForm.group({
     stepOne: this.newForm.group({
       name: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required, Validators.min(999999999), Validators.max(9999999999)]],
       gender: ['', [Validators.required]],
     }),
     stepTwo: this.newForm.group({
-      city: ['', [Validators.required]],
+      city: [this.cityList[0], [Validators.required]],
       hobby: ['', [Validators.required]],
       dob: ['', [Validators.required]],
-      age: [{value:0, disabled: true}, [Validators.required]]
+      age: [{value:this.age, disabled: true}, [Validators.required]]
     }),
     stepThree: this.newForm.group({
-      range: ['', [Validators.required]],
-      userType: ['', [Validators.required]],
+      range: [0, [Validators.required]],
+      userType: [this.userTypeList[1], [Validators.required]],
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
     })
   })
 
-  get stepOne(){
-    return this.stepForm.get('stepOne')
+  ngOnInit(){
+    this.stepOne = this.stepForm.controls.stepOne as FormGroup;
   }
+
+  get name(){
+    return this.stepForm.get('stepOne')?.get('name')
+  }
+  get email(){
+    return this.stepForm.get('stepOne')?.get('email')
+  }
+  get phoneNumber(){
+    return this.stepForm.get('stepOne')?.get('phoneNumber')
+  }
+  get gender(){
+    return this.stepForm.get('stepOne')?.get('gender')
+  }
+
   get stepTwo(){
     return this.stepForm.get('stepTwo')
   }

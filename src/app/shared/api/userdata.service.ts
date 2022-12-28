@@ -38,4 +38,15 @@ export class UserdataService {
     })
   }
 
+  retriveUserData(id:any){
+    return this.http.get("https://angular-practice-test-default-rtdb.firebaseio.com/Users/"+id+".json")
+  }
+
+  updateUserData(data:any, id:any){
+    return this.http.put("https://angular-practice-test-default-rtdb.firebaseio.com/Users/"+id+".json", data)
+      .subscribe( (data) => {
+        console.log(data);
+      })
+  }
+
 }

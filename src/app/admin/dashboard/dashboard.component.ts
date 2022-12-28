@@ -32,4 +32,8 @@ export class DashboardComponent {
     window.location.reload()
   }
 
+  update(data:any, id:any){
+    this.userservice.updateUserData(data, id)
+  }
+
 }

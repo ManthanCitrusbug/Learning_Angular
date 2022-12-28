@@ -19,7 +19,7 @@ import { NotauthorizedInterceptor } from './interceptors/notauthorized.intercept
     AppRoutingModule,
     NgbModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

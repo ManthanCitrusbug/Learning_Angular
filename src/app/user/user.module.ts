@@ -9,6 +9,7 @@ import { RegisterComponent } from '../auth/register/register.component';
 import { StepOneComponent } from './updateDetailForm/step-one/step-one.component';
 import { StepTwoComponent } from './updateDetailForm/step-two/step-two.component';
 import { StepThreeComponent } from './updateDetailForm/step-three/step-three.component';
+import { MatStepperModule } from '@angular/material/stepper'
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { StepThreeComponent } from './updateDetailForm/step-three/step-three.com
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatStepperModule,
   ],
   providers:[
     RegisterComponent

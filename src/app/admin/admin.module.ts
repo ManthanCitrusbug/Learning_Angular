@@ -8,6 +8,8 @@ import { IsAuthorizedPipe } from '../pipes/is-authorized.pipe';
 import { AdvancePipe } from '../pipes/advance.pipe';
 import { HeaderDirectiveDirective } from '../directives/header-directive.directive';
 import { RangePipe } from '../pipes/range.pipe';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -16,12 +18,15 @@ import { RangePipe } from '../pipes/range.pipe';
     IsAuthorizedPipe,
     AdvancePipe,
     HeaderDirectiveDirective,
-    RangePipe
+    RangePipe,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class AdminModule { }

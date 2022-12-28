@@ -1,2 +1,27 @@
-<p>step-three works!</p>
-<span class="mx-5"><a href="/user/step-form/step-2">Previous</a></span>
+<h1 class="text-center mt-5">Step - 3</h1>
+<div class="container text-center my-5 bg-light py-5">
+    <div [formGroup]="stepThreeForm">
+        <div>
+            <label for="range">Range (Value = {{ stepThreeForm.value.range }})</label> <br>
+            <input type="range" name="range" formControlName="range" class="w-75 m-auto" min="0" max="100">
+            <span *ngIf="range && range.errors?.['required'] && range.touched" class="text-center text-danger">Enter Birth Date</span>  <br> <br>
+            
+            <label for="userType">User Type</label>
+            <select name="userType" formControlName="userType" class="form-control w-75 m-auto">
+                <ng-container *ngFor="let usertype of userTypeList">
+                    <option value="{{ usertype }}">{{ usertype }}</option>
+                </ng-container>
+            </select>  <br>
+            
+            <label for="password">Password</label>
+            <input type="password" name="password" formControlName="password" class="form-control w-75 m-auto" placeholder="Enter Password">
+            <span *ngIf="password && password.errors?.['required'] && password.touched" class="text-center text-danger">Enter your password</span>  <br> <br>
+            
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="text" name="confirmPassword" formControlName="confirmPassword" class="form-control w-75 m-auto" placeholder="Confirm your password">
+            <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br> <br>
+            <button mat-raised-button color="warn" class="mx-5" mat-button matStepperPrevious>Previous</button>
+            <button mat-raised-button color="accent" class="mx-5" [disabled]="stepThreeForm.invalid" mat-button matStepperNext>Done</button>
+        </div> 
+    </div>
+</div>

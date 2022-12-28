@@ -1,2 +1,46 @@
-<h1>asdasdasdasd</h1>
-<span class="mx-5"><a href="/user/step-form/step-2">Next</a></span>
+<!-- <h1>asdasdasdasd</h1>
+<span class="mx-5"><a href="/user/step-form/step-2">Next</a></span> -->
+<h1 class="text-center mt-5">Step - 1</h1>
+<div class="container text-center my-5 bg-light py-5">
+    <mat-horizontal-stepper>
+        <mat-step label="Step 1">
+            <form class="mt-5" [formGroup]="stepForm">
+                <div formGroupName="stepOne">
+                    <label for="name">Name</label>
+                    <input type="text" formControlName="name" name="name" class="form-control w-75 m-auto" placeholder="Enter Name">
+                    <span *ngIf="name && name.invalid && (name.touched || name.dirty)" class="text-center text-danger">Name is Required</span> <br> <br>
+                
+                    <label for="email">Email</label>
+                    <input type="email" formControlName="email" name="email" class="form-control w-75 m-auto" placeholder="Enter Email">
+                    <span *ngIf="email && email.errors?.['required'] && (email.touched || email.dirty)" class="text-center text-danger">Email is Required</span>
+                    <span *ngIf="email && email.errors?.['email'] && (email.touched || email.dirty)" class="text-center text-danger">Enter valid is Required</span> <br> <br>
+                
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="number" formControlName="phoneNumber" name="phoneNumber" class="form-control w-75 m-auto" placeholder="Enter Phone Number">
+                    <span *ngIf="phoneNumber && (phoneNumber.touched || phoneNumber.dirty) &&
+                    phoneNumber.errors?.['required']" class="text-center text-danger" class="text-center text-danger">Phone Number is Required</span> <br>
+                    <span *ngIf="phoneNumber && (phoneNumber.errors?.['min'] || phoneNumber.errors?.['max'])" class="text-center text-danger">Phone Number length must be 10</span> <br>
+                
+                    <label for="gender">Gender</label> <br>
+                    <input type="radio" formControlName="gender" name="gender" value="male" class="m-auto mx-2" placeholder="Enter Name"> Male
+                    <input type="radio" formControlName="gender" name="gender" value="female" class="m-auto mx-2" placeholder="Enter Name"> Female
+                    <input type="radio" formControlName="gender" name="gender" value="other" class="m-auto mx-2" placeholder="Enter Name"> Other <br>
+                    <span *ngIf="gender && gender.errors?.['required']" class="text-center text-danger">This field is required</span> <br> <br>
+                    <button mat-raised-button color="accent" [disabled]="stepOne.invalid" mat-button matStepperNext>Next</button>
+                </div>
+
+                <mat-step label="Step 2">
+                    <app-step-two [cityList]="cityList" formGroupName="stepTwo"></app-step-two>
+                </mat-step>
+        
+                <mat-step label="Step 3">
+                    <app-step-three [userTypeList]="userTypeList" formGroupName="stepThree"></app-step-three>
+                </mat-step>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+<a mat-raised-button color="primary" routerLink="/user/dashboard">Back</a>
+<pre>
+    {{ stepForm.value | json }}
+</pre>

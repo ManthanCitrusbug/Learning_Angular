@@ -1,2 +1,32 @@
-<p>step-two works!</p>
-<span class="mx-5"><a href="/user/step-form/step-1">Previous</a></span><span class="mx-5"><a href="/user/step-form/step-3">Next</a></span>
+<!-- <p>step-two works!</p>
+<span class="mx-5"><a href="/user/step-form/step-1">Previous</a></span><span class="mx-5"><a href="/user/step-form/step-3">Next</a></span> -->
+<h1 class="text-center mt-5">Step - 2</h1>
+<div class="container text-center my-5 bg-light py-5">
+    <div [formGroup]="stepTwoForm">
+        <div>
+            <label for="city">City</label>
+            <select name="city" formControlName="city" class="form-control w-75 m-auto">
+                <ng-container *ngFor="let city of cityList">
+                    <option value="{{ city }}">{{ city }}</option>
+                </ng-container>
+            </select>
+            <span *ngIf="city && city.errors?.['required']" class="text-center text-danger">This field is required</span>  <br>
+        
+            <label for="hobby">Hobby</label> <br>
+            <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Music" (change)="getHobbyValue($event)"> Music
+            <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Travel" (change)="getHobbyValue($event)"> Travel
+            <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Play" (change)="getHobbyValue($event)"> Play
+            <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Drawing" (change)="getHobbyValue($event)"> Drawing <br>
+            <span *ngIf="hobbyError" class="text-center text-danger">This field is required</span> <br> <br>
+        
+            <label for="dob">Date of Birth</label>
+            <input type="date" name="dob" formControlName="dob" class="form-control w-75 m-auto" placeholder="Enter Name" (change)="getAgeValue($event)">
+            <span *ngIf="dob && dob.errors?.['required'] && dob.touched" class="text-center text-danger">Enter Birth Date</span>  <br> <br>
+        
+            <label for="age">Age</label>
+            <input type="number" name="age" formControlName="age" class="form-control w-75 m-auto" placeholder="Age" value="{{ age }}">  <br>
+            <button mat-raised-button color="warn" class="mx-5" mat-button matStepperPrevious>Previous</button>
+            <button mat-raised-button color="accent" class="mx-5" [disabled]="stepTwoForm.invalid" mat-button matStepperNext>Next</button>
+        </div>
+    </div>
+</div>
