@@ -10,6 +10,7 @@ import { HeaderDirectiveDirective } from '../directives/header-directive.directi
 import { RangePipe } from '../pipes/range.pipe';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from '../auth/register/register.component';
 
 
 @NgModule({
@@ -27,6 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+  ],
+  providers:[
+    RegisterComponent
   ]
 })
 export class AdminModule { }

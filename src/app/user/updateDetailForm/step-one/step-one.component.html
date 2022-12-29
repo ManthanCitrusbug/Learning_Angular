@@ -2,7 +2,7 @@
 <span class="mx-5"><a href="/user/step-form/step-2">Next</a></span> -->
 <h1 class="text-center mt-5">Step - 1</h1>
 <div class="container text-center my-5 bg-light py-5">
-    <mat-horizontal-stepper>
+    <mat-horizontal-stepper [linear]="false">
         <mat-step label="Step 1">
             <form class="mt-5" [formGroup]="stepForm">
                 <div formGroupName="stepOne">
