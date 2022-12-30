@@ -1,8 +1,8 @@
-<div *ngIf="!responce">
-    <h1>Loading...</h1>
+<div *ngIf="!responce" class="wait-for-response">
+    <div class="loading"></div>
 </div>
 <div class="container text-center my-5 bg-light py-5" *ngIf="responce">
-    <h1>Register</h1>
+    <h1>Edit Data</h1>
     <form class="mt-5" [formGroup]="updateUserForm">
         <label for="name">Name</label>
         <input type="text" formControlName="name" name="name" class="form-control w-75 m-auto" placeholder="Enter Name">
@@ -45,7 +45,7 @@
         <span *ngIf="dob && dob.errors?.['required'] && dob.touched" class="text-center text-danger">Enter Birth Date</span>  <br> <br>
     
         <label for="age">Age</label>
-        <input type="number" name="age" formControlName="age" class="form-control w-75 m-auto" placeholder="Age" value="{{ age }}">  <br>
+        <input type="number" name="age" formControlName="age" class="form-control w-75 m-auto" placeholder="Age" value="{{ getage }}">  <br>
     
         <label for="range">Range (Value = {{ updateUserForm.value.range }})</label> <br>
         <input type="range" name="range" formControlName="range" class="w-75 m-auto" min="0" max="100">
@@ -64,7 +64,8 @@
 
         <label for="confirmPassword">Confirm Password</label>
         <input type="text" name="confirmPassword" formControlName="confirmPassword" class="form-control w-75 m-auto" placeholder="Confirm your password">
-        <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br> <br>
+        <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br>
+        <span *ngIf="confirmPassword && confirmPassword.errors?.['confirmPassword'] && confirmPassword.touched" class="text-center text-danger">Password is not same.</span> <br> <br>
 
         <button mat-raised-button color="accent" [disabled]="updateUserForm.invalid" (click)="updateData(updateUserForm.value)">Update Data</button>
     </form>

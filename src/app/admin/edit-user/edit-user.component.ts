@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
+import { confirmPasswordValidators } from '../../shared/matchpassword.validator'
 
 @Component({
   selector: 'app-edit-user',
@@ -35,7 +36,8 @@ export class EditUserComponent {
   }
 
   Age(event:any){
-    return this.rootComponent.getAge(event)
+    this.getage = this.rootComponent.getAge(event)
+    return this.getage
   }
 
   Hobby(event:any){
@@ -50,11 +52,14 @@ export class EditUserComponent {
     city : ['', [Validators.required]],
     hobby : ['', [Validators.required]],
     dob : ['', [Validators.required]],
-    age : [{value:this.getage, disabled: true}, [Validators.required]],
+    age : ['', [Validators.required]],
     range : ['', [Validators.required]],
     userType : ['', [Validators.required]],
     password : ['', [Validators.required]],
     confirmPassword : ['', [Validators.required]],
+  },
+  {
+    validator: confirmPasswordValidators('password', 'confirmPassword')
   })
 
   get name(){
@@ -95,8 +100,10 @@ export class EditUserComponent {
   }
 
   updateData(value:any){
-    this.userService.updateUserData(value, this.http.snapshot.paramMap.get('id'))
-    this.route.navigate(['admin/dashboard'])
+    console.warn(value);
+    
+    // this.userService.updateUserData(value, this.http.snapshot.paramMap.get('id'))
+    // this.route.navigate(['admin/dashboard'])
   }
 
 }

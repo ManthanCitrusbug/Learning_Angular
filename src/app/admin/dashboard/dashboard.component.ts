@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { catchError } from 'rxjs';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
 import { UserauthguardService } from 'src/app/shared/userauthguard.service';
 
@@ -13,11 +14,18 @@ export class DashboardComponent {
 
   loginUserData:any = this.loginservice.isUserLoggedIn()
   userData!:any;
+  errorMessage!:string;
 
   ngOnInit(){    
-    this.userservice.getAllUserData().subscribe( data => {
+    this.userservice.getAllUserData()
+    .pipe(
+      catchError(error => {
+        return this.errorMessage = error.message;
+      })
+    )
+    .subscribe( data => {
       this.userData = data
-    }) 
+    })
   }
 
   logout(){

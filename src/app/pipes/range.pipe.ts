@@ -5,8 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class RangePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return `1 to ${value}`;
+  transform(value: number, ...args: unknown[]): unknown {
+    var range = []
+    for (let i=1; i< value; i++){
+      range.push(i)
+    }
+    return range
   }
 
 }

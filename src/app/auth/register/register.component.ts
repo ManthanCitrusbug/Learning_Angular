@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
-import { UserDataModelService } from '../user-data-model.service';
+// import { UserDataModelService } from '../user-data-model.service';
 
 @Component({
   selector: 'app-register',
