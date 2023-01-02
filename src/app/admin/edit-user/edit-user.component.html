@@ -34,10 +34,10 @@
         <span *ngIf="city && city.errors?.['required']" class="text-center text-danger">This field is required</span>  <br>
     
         <label for="hobby">Hobby</label> <br>
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Music" (change)="Hobby($event)"> Music
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Travel" (change)="Hobby($event)"> Travel
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Play" (change)="Hobby($event)"> Play
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Drawing" (change)="Hobby($event)"> Drawing <br>
+        <ng-container *ngFor="let hobby of hobbyList">
+            <input type="checkbox" class="mx-2" value="{{hobby}}" (change)="Hobby($event)"> {{ hobby }} <br>
+        </ng-container>
+
         <span *ngIf="hobbyError" class="text-center text-danger">This field is required</span> <br> <br>
     
         <label for="dob">Date of Birth</label>
@@ -67,7 +67,8 @@
         <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br>
         <span *ngIf="confirmPassword && confirmPassword.errors?.['confirmPassword'] && confirmPassword.touched" class="text-center text-danger">Password is not same.</span> <br> <br>
 
-        <button mat-raised-button color="accent" [disabled]="updateUserForm.invalid" (click)="updateData(updateUserForm.value)">Update Data</button>
+        <button mat-raised-button color="accent" [disabled]="updateUserForm.invalid" (click)="updateData(updateUserForm.value)" class="mx-2">Update Data</button>
+        <a mat-raised-button color="primary" routerLink="/admin/practice" class="mx-2">Practice</a>
     </form>
 </div>
 

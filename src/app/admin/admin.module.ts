@@ -11,6 +11,7 @@ import { RangePipe } from '../pipes/range.pipe';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from '../auth/register/register.component';
+import { PracticeComponent } from './practice/practice.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { RegisterComponent } from '../auth/register/register.component';
     HeaderDirectiveDirective,
     RangePipe,
     EditUserComponent,
+    PracticeComponent,
   ],
   imports: [
     CommonModule,

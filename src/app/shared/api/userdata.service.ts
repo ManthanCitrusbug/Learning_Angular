@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { catchError, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class UserdataService {
   }
 
   postUserData(data:any){
-    this.http.post("https://angular-practice-test-default-rtdb.firebaseio.com/Users.json", data)
+    return this.http.post("https://angular-practice-test-default-rtdb.firebaseio.com/Users.json", data)
       .subscribe( (data) => {
         console.warn(data);
     })
@@ -35,6 +35,7 @@ export class UserdataService {
     return this.http.delete("https://angular-practice-test-default-rtdb.firebaseio.com/Users/"+id+".json")
       .subscribe( (data) => {
         console.warn(data);
+        window.location.reload()
     })
   }
 

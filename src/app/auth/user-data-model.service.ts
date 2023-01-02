@@ -5,7 +5,7 @@ export class UserDataModelService {
   phoneNumber:string | undefined;
   gender:string | undefined;
   city:string | undefined;
-  hobby: string | undefined;
+  hobby: string[] | undefined;
   dob: string | undefined;
   age: number | undefined;
   range: number | undefined;
@@ -14,7 +14,7 @@ export class UserDataModelService {
   confirmPassword: string | undefined;
 
 
-  constructor(name:string, email:string, phoneNumber:string, gender:string, city:string, hobby:string,
+  constructor(name:string, email:string, phoneNumber:string, gender:string, city:string, hobby:string[],
     dob:string, age:number, range:number, userType:string, password:string, confirmPassword:string) { 
 
       this.name = name;

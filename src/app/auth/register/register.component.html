@@ -31,10 +31,10 @@
         <span *ngIf="city && city.errors?.['required']" class="text-center text-danger">This field is required</span>  <br>
     
         <label for="hobby">Hobby</label> <br>
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Music" (change)="getHobby($event)"> Music
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Travel" (change)="getHobby($event)"> Travel
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Play" (change)="getHobby($event)"> Play
-        <input type="checkbox" formControlName="hobby" name="hobby" class="mx-2" value="Drawing" (change)="getHobby($event)"> Drawing <br>
+        <ng-container *ngFor="let hobby of hobbyList">
+            <input type="checkbox" class="mx-2" value="{{hobby}}" (change)="getHobby($event)"> {{ hobby }} <br>
+        </ng-container>
+
         <span *ngIf="hobbyError" class="text-center text-danger">This field is required</span> <br> <br>
     
         <label for="dob">Date of Birth</label>
@@ -63,7 +63,7 @@
         <input type="text" name="confirmPassword" formControlName="confirmPassword" class="form-control w-75 m-auto" placeholder="Confirm your password">
         <span *ngIf="confirmPassword && confirmPassword.errors?.['required'] && confirmPassword.touched" class="text-center text-danger">Confirm your password</span> <br> <br>
 
-        <button mat-raised-button color="accent" [disabled]="registerForm.invalid">Register {{registerForm.invalid}}</button>
+        <button mat-raised-button color="accent" [disabled]="registerForm.invalid">Register</button>
     </form>
 </div>
 

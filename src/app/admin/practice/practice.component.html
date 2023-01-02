@@ -1,0 +1,5 @@
+<h1>CheckBoxs</h1>
+<ng-container *ngFor="let x of valList">
+    <input type="checkbox" value="{{ x }}" class="mx-2" (click)="getVal($event)"> {{ x }}
+</ng-container>
+<input type="submit" class="btn btn-large btn-success" value="Submit" (click)="onSubmit()">

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
+import { UserDataModelService } from '../user-data-model.service';
 // import { UserDataModelService } from '../user-data-model.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class RegisterComponent {
     phoneNumber: new FormControl('', [Validators.required, Validators.min(999999999), Validators.max(9999999999)]),
     gender: new FormControl('', [Validators.required]),
     city: new FormControl(this.cityList[0], [Validators.required]),
-    hobby: new FormControl('', [Validators.required]),
+    hobby: new FormArray([]),
     dob: new FormControl('', [Validators.required]),
     age: new FormControl({value:this.age, disabled: true}, [Validators.required]),
     range: new FormControl(this.rangeVal, [Validators.required]),
@@ -55,7 +56,7 @@ export class RegisterComponent {
     return this.registerForm.get('city')
   }
   get hobby(){
-    return this.registerForm.get('hobby')
+    return this.registerForm.get('hobby') as FormArray
   }
   get dob(){
     return this.registerForm.get('dob')
@@ -82,29 +83,35 @@ export class RegisterComponent {
   }
 
   getHobby(event:any){
-    var isInList = this.hobbyVal.includes(event.target.value)
-    
-    if (event.target.checked && !isInList){
-      this.hobbyVal.push(event.target.value)
+    var checkedVal = this.registerForm.get('hobby') as FormArray;
+
+    if (event.target.checked){
+      checkedVal.push(new FormControl(event.target.value))
     } else {
-      this.hobbyVal = this.hobbyVal.filter(e => e != event.target.value)
+      let i = 0;
+      checkedVal.controls.forEach( (e) => {
+        if(e.value == event.target.value){
+          checkedVal.removeAt(i)
+        }
+        i++;
+      })
     }
-    if (this.hobbyVal.length == 0) {
+    if (checkedVal.controls.length == 0) {
       this.hobbyError = true
     } else {
       this.hobbyError = false
     }
-    return this.hobbyVal, this.hobbyError
+    return this.hobbyError
   }
 
   registerUser(){
     this.registerForm.value.age = this.age
-    // this.registerForm.value.hobby = this.hobbyVal
+    
     this.userData = this.registerForm.value
-    this.postData.postUserData(this.userData)
-    // this.dataToStore = new UserDataModelService(this.userData.name, this.userData.email, this.userData.phoneNumber, this.userData.gender,
-    //   this.userData.city, this.userData.hobby, this.userData.dov, this.userData.age, this.userData.range, this.userData.userType,
-    //   this.userData.password, this.userData.confirmPassword)
+    this.dataToStore = new UserDataModelService(this.userData.name, this.userData.email, this.userData.phoneNumber, this.userData.gender,
+      this.userData.city, this.userData.hobby, this.userData.dob, this.userData.age, this.userData.range, this.userData.userType,
+      this.userData.password, this.userData.confirmPassword)
+    this.postData.postUserData(this.dataToStore)
     localStorage.setItem('UserData', JSON.stringify(this.userData))
 
     this.route.navigate([''])

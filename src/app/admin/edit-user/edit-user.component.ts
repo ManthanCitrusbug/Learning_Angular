@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterComponent } from 'src/app/auth/register/register.component';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
@@ -41,7 +41,27 @@ export class EditUserComponent {
   }
 
   Hobby(event:any){
-    return this.rootComponent.getHobby(event)
+    console.warn(this.updateUserForm.value);
+    
+    var checkedVal = this.updateUserForm.get('hobby') as FormArray;
+
+    if (event.target.checked){
+      checkedVal.push(this.updateForm.array(event.target.value))
+    } else {
+      let i = 0;
+      checkedVal.controls.forEach( (e) => {
+        if(e.value == event.target.value){
+          checkedVal.removeAt(i)
+        }
+        i++;
+      })
+    }
+    if (checkedVal.controls.length == 0) {
+      this.hobbyError = true
+    } else {
+      this.hobbyError = false
+    }
+    return this.hobbyError
   }
 
   updateUserForm = this.updateForm.group({
@@ -50,7 +70,7 @@ export class EditUserComponent {
     phoneNumber : ['', [Validators.required, Validators.min(999999999), Validators.max(9999999999)]],
     gender : ['', [Validators.required]],
     city : ['', [Validators.required]],
-    hobby : ['', [Validators.required]],
+    hobby : this.updateForm.array([]),
     dob : ['', [Validators.required]],
     age : ['', [Validators.required]],
     range : ['', [Validators.required]],
@@ -78,7 +98,7 @@ export class EditUserComponent {
     return this.updateUserForm.get('city')
   }
   get hobby(){
-    return this.updateUserForm.get('hobby')
+    return this.updateUserForm.get('hobby') as FormArray
   }
   get dob(){
     return this.updateUserForm.get('dob')
@@ -100,10 +120,8 @@ export class EditUserComponent {
   }
 
   updateData(value:any){
-    console.warn(value);
-    
-    // this.userService.updateUserData(value, this.http.snapshot.paramMap.get('id'))
-    // this.route.navigate(['admin/dashboard'])
+    this.userService.updateUserData(value, this.http.snapshot.paramMap.get('id'))
+    this.route.navigate(['admin/dashboard'])
   }
 
 }
