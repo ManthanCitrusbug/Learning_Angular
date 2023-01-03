@@ -21,6 +21,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, UserauthguardGuard]
   },
   {
+    path:"static",
+    loadChildren: () => import('./static/static.module').then(mod => mod.StaticModule)
+  },
+  {
     path:"error",
     component: NotAuthorizedComponent
   },

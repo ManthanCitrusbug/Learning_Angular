@@ -26,12 +26,18 @@ export class EditUserComponent {
   getage!:number;
   hobbyError:boolean = true;
   responce:boolean = false;
+  newData!:any;
 
   ngOnInit(){
     this.userService.retriveUserData(this.http.snapshot.paramMap.get('id'))
     .subscribe( data => { 
       this.responce = true
+      this.newData = data
       this.updateUserForm.patchValue(data)
+      var checkedVal = this.updateUserForm.get('hobby') as FormArray;
+      for (let i of this.newData.hobby){
+        checkedVal.push(this.updateForm.control(i))
+      }
     })
   }
 
@@ -41,12 +47,11 @@ export class EditUserComponent {
   }
 
   Hobby(event:any){
-    console.warn(this.updateUserForm.value);
-    
     var checkedVal = this.updateUserForm.get('hobby') as FormArray;
+    var isInList = checkedVal.value.includes(event.target.value)
 
-    if (event.target.checked){
-      checkedVal.push(this.updateForm.array(event.target.value))
+    if (event.target.checked && !isInList){
+      checkedVal.push(this.updateForm.control(event.target.value))
     } else {
       let i = 0;
       checkedVal.controls.forEach( (e) => {
@@ -56,6 +61,8 @@ export class EditUserComponent {
         i++;
       })
     }
+    console.warn(this.updateUserForm.value);
+    
     if (checkedVal.controls.length == 0) {
       this.hobbyError = true
     } else {
@@ -99,6 +106,18 @@ export class EditUserComponent {
   }
   get hobby(){
     return this.updateUserForm.get('hobby') as FormArray
+  }
+  get Play(){
+    return this.updateUserForm.get('Play')
+  }
+  get Travel(){
+    return this.updateUserForm.get('Travel')
+  }
+  get Music(){
+    return this.updateUserForm.get('Music')
+  }
+  get Drawing(){
+    return this.updateUserForm.get('dob')
   }
   get dob(){
     return this.updateUserForm.get('dob')

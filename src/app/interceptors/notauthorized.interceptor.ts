@@ -18,7 +18,8 @@ export class NotauthorizedInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((error) => {
-                    
+          console.warn(error.message, '=============   21');
+          
           return throwError(error);
         })
       )

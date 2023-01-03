@@ -34,7 +34,7 @@
         <span *ngIf="city && city.errors?.['required']" class="text-center text-danger">This field is required</span>  <br>
     
         <label for="hobby">Hobby</label> <br>
-        <ng-container *ngFor="let hobby of hobbyList">
+        <ng-container *ngFor="let hobby of hobbyList; let i = index" formArrayName="hobby">
             <input type="checkbox" class="mx-2" value="{{hobby}}" (change)="Hobby($event)"> {{ hobby }} <br>
         </ng-container>
 
