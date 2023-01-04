@@ -7,12 +7,14 @@ import { EditdataComponent } from './editdata/editdata.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
   declarations: [
     AlldataComponent,
-    EditdataComponent
+    EditdataComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,

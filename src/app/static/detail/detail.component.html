@@ -1,6 +1,13 @@
+<div class="w-50 m-auto p-5">
+    <h2>{{ getData.todo }}</h2>
+    <h4>ID : {{ getData.id }}</h4>
+    <h4>Completed : {{ getData.completed }}</h4>
+    <h4>UserID : {{ getData.userId }}</h4>
+</div>
+
 <h2 class="m-auto text-center p-2">Edit Data</h2>
 <div class="w-75 m-5 bg-light text-center m-auto mt-3 p-2">
-    <form [formGroup]="editDataForm">
+    <form [formGroup]="newForm">
         <label for="">Todo</label>
         <input type="text" formControlName="todo" class="w-50 form-control m-auto" placeholder="Todo"> <br>
         <label for="">Completed</label>
@@ -10,7 +17,8 @@
         </select> <br>
         <label for="">UserId</label>
         <input type="number" formControlName="userId" class="w-50 form-control m-auto" placeholder="UserID"> <br>
-        <button mat-dialog-close mat-raised-button color="primary" (click)="updateData()" [disabled]="editDataForm.invalid" class="mx-2">Update Data</button>
-        <button mat-dialog-close mat-raised-button color="warn" class="mx-2">Close</button>
+        <button mat-raised-button color="primary" (click)="editData()" [disabled]="newForm.invalid" class="mx-2">Update Data</button>
+        <a routerLink="/static/alldata" mat-raised-button color="warn">Back</a>
     </form>
 </div>
+

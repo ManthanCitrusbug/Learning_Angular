@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserdataService } from 'src/app/shared/api/userdata.service';
+import { TokenService } from 'src/app/shared/token/token.service';
 import { UserauthguardService } from 'src/app/shared/userauthguard.service';
 
 @Component({
@@ -10,7 +11,16 @@ import { UserauthguardService } from 'src/app/shared/userauthguard.service';
 })
 export class LoginComponent {
 
-  constructor (private route: Router, private loginUser: UserauthguardService, private firebasedata: UserdataService) {}
+  constructor (
+    private route: Router, 
+    private loginUser: UserauthguardService, 
+    private firebasedata: UserdataService,
+    private http: TokenService) {
+      // var token = localStorage.getItem("token")
+      // if (token){
+      //   this.route.navigate(['/authentication/dashboard'])
+      // }
+    }
 
   isSubmitted:boolean = false;
   fireBaseData!:any;
@@ -57,6 +67,18 @@ export class LoginComponent {
     localStorage.removeItem("LastLogin")
     this.isSubmitted = true
     
+    // this.http.login(formData.value)
+    //   .subscribe((res) => {
+    //     this.newData = res
+    //     localStorage.setItem("token", this.newData.data.access)
+    //   })
+    // console.warn("before redirect");
+    
+    // this.route.navigate(['admin/dashboard'])
+    // console.warn("after redirect");
+
+    // localStorage.setItem("LoginUser", JSON.stringify({"userType":"Admin"}))
+    
     for (let user in this.fireBaseData){
       if (formData.value.email == this.fireBaseData[user].email && formData.value.password == this.fireBaseData[user].password){
         this.authorizedUser = this.fireBaseData[user]  
@@ -68,10 +90,17 @@ export class LoginComponent {
     
     if (this.authorizedUser){
       if (this.authorizedUser.userType == "User"){
-        this.route.navigate(['user/dashboard'])
+        this.route.navigate(['/user/dashboard'])
       } else if (this.authorizedUser.userType == "Admin"){
-        this.route.navigate(['admin/dashboard'])
+        this.route.navigate(['/admin/dashboard'])
       }
+    } else if (formData.value.email == "kishan1.citrusbug@gmail.com" && formData.value.password == "Patel@9999"){
+      this.http.login(formData.value)
+        .subscribe((data) => {
+          this.newData = data
+          localStorage.setItem("token", this.newData.data.access)
+          this.route.navigate(['/authentication/dashboard'])
+        })
     }
   }
 }

@@ -18,6 +18,6 @@ export class AlldataComponent {
   }
 
   openPopUp(id:number){
-    this.popup.open(EditdataComponent, {width:"50%", height:'75%', data:{id:id}})
+    this.popup.open(EditdataComponent, {width:"50%", height:'50%', data:{id:id}})
   }
 }

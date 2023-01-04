@@ -31,7 +31,7 @@ export class EditdataComponent {
   })
 
   updateData(){
-    console.warn(this.editDataForm.value);
+    Object.assign(this.getData, this.editDataForm.value)
   }
 
 }

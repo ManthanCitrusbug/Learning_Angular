@@ -12,6 +12,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from '../auth/register/register.component';
 import { PracticeComponent } from './practice/practice.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PracticeComponent } from './practice/practice.component';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
   ],
   providers:[
     RegisterComponent

@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
 import { AdminguardGuard } from './shared/adminguard.guard';
 import { AuthGuard } from './shared/auth.guard';
+import { TokenGuard } from './shared/token.guard';
 import { UserauthguardGuard } from './shared/userauthguard.guard';
 
 const routes: Routes = [
   {
     path:"",
-    loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
+    canActivate: [TokenGuard]
   },
   {
     path:"user",
@@ -19,6 +21,10 @@ const routes: Routes = [
     path:"admin",
     loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
     canActivate: [AuthGuard, UserauthguardGuard]
+  },
+  {
+    path:"authentication",
+    loadChildren: () => import('./authentication/authentication.module').then(mod => mod.AuthenticationModule),
   },
   {
     path:"static",

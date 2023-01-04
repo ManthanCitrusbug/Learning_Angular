@@ -1,0 +1,10 @@
+<p>dashboard works!</p>
+<button mat-raised-button color="primary" (click)="logout()">Logout</button>
+<ng-container *ngFor="let data of allData?.data">
+    <h1>{{ data }}</h1>
+</ng-container>
+<ng-container>
+    <div class="text-danger m-auto w-75">
+        {{ errors.customError }}
+    </div>
+</ng-container>
