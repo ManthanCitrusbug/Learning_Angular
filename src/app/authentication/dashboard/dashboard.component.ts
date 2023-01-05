@@ -26,6 +26,7 @@ export class DashboardComponent {
   logout(){
     localStorage.removeItem("token")
     this.route.navigate([''])
+    this.error.customError = ''
   }
 
 }

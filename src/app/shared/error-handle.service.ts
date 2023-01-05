@@ -11,12 +11,15 @@ export class ErrorHandleService {
   customError!:string;
 
   public errorHandle(error:HttpErrorResponse){
-    console.warn(error);
-    
+
     var newError = ''
     switch (error.status){
       case 401:
-        newError = "User is not Authorized. " + error.message + " with the code " + error.status
+        newError = "User is not Authorized. " + error.message
+        break;
+      case 404:
+        newError = "Data not found. " + error.message
+        break;
     }
     this.customError = newError
   }
