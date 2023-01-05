@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path:"",
     loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
-    canActivate: [TokenGuard]
+    // canActivate: [TokenGuard]
   },
   {
     path:"user",
@@ -20,7 +20,7 @@ const routes: Routes = [
   {
     path:"admin",
     loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule),
-    canActivate: [AuthGuard, UserauthguardGuard]
+    canActivate: [AuthGuard, UserauthguardGuard],
   },
   {
     path:"authentication",

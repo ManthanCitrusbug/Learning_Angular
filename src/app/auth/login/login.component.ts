@@ -16,10 +16,10 @@ export class LoginComponent {
     private loginUser: UserauthguardService, 
     private firebasedata: UserdataService,
     private http: TokenService) {
-      // var token = localStorage.getItem("token")
-      // if (token){
-      //   this.route.navigate(['/authentication/dashboard'])
-      // }
+      var token = localStorage.getItem("token")
+      if (token){
+        this.route.navigate(['/authentication/dashboard'])
+      }
     }
 
   isSubmitted:boolean = false;
