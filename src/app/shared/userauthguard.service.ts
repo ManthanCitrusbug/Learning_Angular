@@ -12,10 +12,12 @@ export class UserauthguardService {
   loggedInUserData:any;
 
   isUserLoggedIn(){
-    this.localData = localStorage.getItem("LoginUser")
+    this.localData = localStorage.getItem("LoginUser")    
     this.loggedInUserData = JSON.parse(this.localData)
-    this.userData = JSON.parse(this.loggedInUserData.userData)
-    return this.userData    
+    if (this.loggedInUserData != null){
+      this.userData = JSON.parse(this.loggedInUserData.userData)
+      return this.userData    
+    }
   }
 
 }

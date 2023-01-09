@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
 import { AdminguardGuard } from './shared/adminguard.guard';
 import { AuthGuard } from './shared/auth.guard';
+import { LoginGuard } from './shared/login/login.guard';
 import { TokenGuard } from './shared/token.guard';
 import { UserauthguardGuard } from './shared/userauthguard.guard';
 
@@ -10,7 +11,7 @@ const routes: Routes = [
   {
     path:"",
     loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule),
-    // canActivate: [TokenGuard]
+    canActivate: [TokenGuard, LoginGuard]
   },
   {
     path:"user",

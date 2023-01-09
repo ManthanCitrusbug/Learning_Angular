@@ -12,6 +12,7 @@ export class TokenGuard implements CanActivate {
   canActivate() {
     var token = localStorage.getItem("token")
     if (token){
+      this.route.navigate(['/authentication/dashboard'])
       return false
     }
     return true;
