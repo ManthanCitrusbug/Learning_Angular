@@ -14,20 +14,60 @@
 </div> -->
 
 <div class="container text-center my-5 bg-light py-5">
-    <h1>Login</h1>
-    <form #loginForm="ngForm" class="mt-5" (ngSubmit)="submitForm(loginForm)">
-
-        <div>
-            <label for="email">Email</label>
-            <input type="email" #email="ngModel" name="email" class="form-control w-75 m-auto" placeholder="Enter your email" [(ngModel)]='enteredEmail' required>
-            <span *ngIf="email.errors && email.errors['required'] && email.touched" class="text-center text-danger">Enter email</span><br>
-            <span *ngIf="emailError() && isSubmitted" class="text-center text-danger">Email is wrong</span> <br> <br>
-            <label for="password">Password</label>
-            <input type="password" #password="ngModel" name="password" class="form-control w-75 m-auto" placeholder="Enter your password" [(ngModel)]="enteredPassword" required>
-            <span *ngIf="password.errors && password.errors['required'] && password.touched" class="text-center text-danger">Enter password</span> <br>
-            <span *ngIf="passwordError() && isSubmitted" class="text-center text-danger">Password is wrong</span><br> <br>
-            <button mat-raised-button color="primary">Login</button>
-        </div>
-    </form>
-    <p class="mt-5">If you're not registered yet! Please <a routerLink="register">Register</a> first.</p>
+  <h1>Login</h1>
+  <form #loginForm="ngForm" class="mt-5" (ngSubmit)="submitForm(loginForm)">
+    <div>
+      <label for="email">Email</label>
+      <input
+        type="email"
+        #email="ngModel"
+        name="email"
+        class="form-control w-75 m-auto"
+        placeholder="Enter your email"
+        [(ngModel)]="enteredEmail"
+        required
+      />
+      <span
+        *ngIf="email.errors && email.errors['required'] && email.touched"
+        class="text-center text-danger"
+        >Enter email</span
+      ><br />
+      <span *ngIf="emailError() && isSubmitted" class="text-center text-danger"
+        >Email is wrong</span
+      >
+      <br />
+      <br />
+      <label for="password">Password</label>
+      <input
+        type="password"
+        #password="ngModel"
+        name="password"
+        class="form-control w-75 m-auto"
+        placeholder="Enter your password"
+        [(ngModel)]="enteredPassword"
+        required
+      />
+      <span
+        *ngIf="
+          password.errors && password.errors['required'] && password.touched
+        "
+        class="text-center text-danger"
+        >Enter password</span
+      >
+      <br />
+      <span
+        *ngIf="passwordError() && isSubmitted"
+        class="text-center text-danger"
+        >Password is wrong</span
+      ><br />
+      <br />
+      <button mat-raised-button color="primary" cLoadingButton variant="ghost">
+        Login
+      </button>
+    </div>
+  </form>
+  <p class="mt-5">
+    If you're not registered yet! Please
+    <a routerLink="register">Register</a> first.
+  </p>
 </div>
